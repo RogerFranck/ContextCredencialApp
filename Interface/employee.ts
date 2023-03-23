@@ -1,7 +1,7 @@
 export interface employee {
   ChangeInfo: Function,
   nombre: string;
-  fechaNacimiento: string;
+  date: string;
   puesto: string;
   email: string;
   telefono: string;

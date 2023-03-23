@@ -22,7 +22,7 @@ export default function MyState({ children }: props) {
   const initialState: employee = {
     ChangeInfo,
     nombre: "Eren Yeager",
-    fechaNacimiento: "3/30/850",
+    date: "3/30/850",
     puesto: "Titan de ataque",
     email: "ErenYeager@eldia.com",
     telefono: "9999999999",

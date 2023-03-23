@@ -23,12 +23,20 @@ export default function useDate(state: state, setstate: Function, bloqueado: boo
 
     if (!bloqueado) {
       //! Actualizar context
-      ChangeInfo('fechaNacimiento', date?.toDateString());
+      ChangeInfo('date', date?.toLocaleDateString());
     }
   };
+
+  const updateDateForm = () => {
+    for (const [key, value] of Object.entries(state)) {
+      ChangeInfo(key, key != 'date' ? value : value.toLocaleDateString())
+     }
+  ;}
+
   return {
     show,
     setShow,
     onChange,
+    updateDateForm
   };
 }

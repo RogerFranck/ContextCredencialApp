@@ -4,7 +4,7 @@ import { employee } from "../Interface/employee";
 const MyContext = createContext<employee>({
   ChangeInfo: () => {},
   nombre: "",
-  fechaNacimiento: "",
+  date: "",
   puesto: "",
   email: "",
   telefono: "",

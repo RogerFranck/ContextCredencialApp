@@ -41,9 +41,14 @@ export default function useForm() {
     if (!bloqueado) {
       //! Actualizar context
       ChangeInfo(key, value);
-      
     }
   };
+
+  const updateInfoForm = () => {
+    for (const [key, value] of Object.entries(state)) {
+     ChangeInfo(key, value)
+    }
+  }
 
   return {
     state,
@@ -52,5 +57,6 @@ export default function useForm() {
     setstate,
     setbloqueado,
     bloqueado,
+    updateInfoForm
   };
 }

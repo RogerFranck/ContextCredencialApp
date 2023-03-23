@@ -13,8 +13,8 @@ import useForm from "../../hooks/useForm";
 import useDate from "../../hooks/useDate";
 
 export default function Form() {
-  const { state, setstate, pickImage, handleChange, setbloqueado, bloqueado } = useForm();
-  const { show, setShow, onChange } = useDate(state, setstate, bloqueado);
+  const { state, setstate, pickImage, handleChange, setbloqueado, bloqueado, updateInfoForm } = useForm();
+  const { show, setShow, onChange, updateDateForm } = useDate(state, setstate, bloqueado);
   return (
     <View style={styles.border}>
       <View style={styles.bodyForm}>
@@ -71,7 +71,13 @@ export default function Form() {
         <View style={styles.parentBox}>
           <TouchableOpacity
             style={[styles.button, bloqueado ? styles.buttonSeletected : styles.buttonNotSeletected]}
-            onPress={() => setbloqueado(true)}
+            onPress={() => {
+              setbloqueado(true)
+              if(bloqueado){               
+                updateInfoForm()
+                updateDateForm()
+              }
+            }}
           >
             <Text style={{ color: "white" }}>Bloquear</Text>
           </TouchableOpacity>

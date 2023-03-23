@@ -4,7 +4,7 @@ import MyContext from "../../context/MyContext";
 import Label from "../General/Label";
 
 export default function BottomInfo() {
-  const { email, telefono, fechaNacimiento } = useContext(MyContext);
+  const { email, telefono, date } = useContext(MyContext);
   return (
     <View style={styles.bgWhite}>
       <View>
@@ -12,7 +12,7 @@ export default function BottomInfo() {
         <Label tittle="Phone" description={telefono} />
       </View>
       <View>
-        <Label tittle="D.O.B" description={fechaNacimiento} />
+        <Label tittle="D.O.B" description={date} />
       </View>
     </View>
   );
