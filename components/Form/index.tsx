@@ -13,7 +13,7 @@ import useForm from "../../hooks/useForm";
 import useImage from "../../hooks/useImage";
 
 export default function Form() {
-  const { state, setstate, pickImage, handleChange } = useForm();
+  const { state, setstate, pickImage, handleChange, setbloqueado } = useForm();
   const { show, setShow, onChange } = useImage(setstate, state);
   return (
     <View style={styles.border}>
@@ -53,7 +53,7 @@ export default function Form() {
           onChangeText={(value) => handleChange("email", value)}
         />
         <TextInput
-          placeholder="Teléfono"
+          placeholder="TelÃ©fono"
           style={styles.input}
           onChangeText={(value) => handleChange("telefono", value)}
         />
@@ -69,10 +69,16 @@ export default function Form() {
           )}
         </View>
         <View style={styles.parentBox}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setbloqueado(true)}
+          >
             <Text style={{ color: "white" }}>Bloquear</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => setbloqueado(false)}
+          >
             <Text style={{ color: "white" }}> Desbloquear</Text>
           </TouchableOpacity>
         </View>

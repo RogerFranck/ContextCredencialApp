@@ -1,17 +1,16 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, View } from "react-native";
-import MyContext from "./context/MyContext";
-import { initialState } from "./context/MyState";
+import MyState from "./context/MyState";
 import Home from "./views/Home";
 
 export default function App() {
   return (
-    <MyContext.Provider value={initialState}>
+    <MyState>
       <View style={styles.container}>
         <Home />
         <StatusBar style="auto" />
       </View>
-    </MyContext.Provider>
+    </MyState>
   );
 }
 
