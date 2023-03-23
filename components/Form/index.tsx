@@ -10,11 +10,11 @@ import {
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import useForm from "../../hooks/useForm";
-import useImage from "../../hooks/useImage";
+import useDate from "../../hooks/useDate";
 
 export default function Form() {
-  const { state, setstate, pickImage, handleChange, setbloqueado } = useForm();
-  const { show, setShow, onChange } = useImage(setstate, state);
+  const { state, setstate, pickImage, handleChange, setbloqueado, bloqueado } = useForm();
+  const { show, setShow, onChange } = useDate(state, setstate, bloqueado);
   return (
     <View style={styles.border}>
       <View style={styles.bodyForm}>
@@ -61,22 +61,22 @@ export default function Form() {
           <TouchableOpacity style={styles.inputImg} onPress={pickImage}>
             <Text style={styles.inputText}>Foto</Text>
           </TouchableOpacity>
-          {state.image && (
+          {state.foto && (
             <Image
-              source={{ uri: state.image }}
+              source={{ uri: state.foto }}
               style={{ width: 50, height: 50 }}
             />
           )}
         </View>
         <View style={styles.parentBox}>
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, bloqueado ? styles.buttonSeletected : styles.buttonNotSeletected]}
             onPress={() => setbloqueado(true)}
           >
             <Text style={{ color: "white" }}>Bloquear</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={styles.button}
+            style={[styles.button, !bloqueado ? styles.buttonSeletected : styles.buttonNotSeletected]}
             onPress={() => setbloqueado(false)}
           >
             <Text style={{ color: "white" }}> Desbloquear</Text>
@@ -135,9 +135,15 @@ const styles = StyleSheet.create({
   },
   button: {
     width: "45%",
-    backgroundColor: "black",
+    // backgroundColor: "black",
     padding: 10,
     marginTop: 10,
     alignItems: "center",
+  },
+  buttonSeletected: {
+    backgroundColor: "black",
+  },
+  buttonNotSeletected: {
+    backgroundColor: "blue",
   },
 });

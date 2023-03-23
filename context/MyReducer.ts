@@ -1,12 +1,14 @@
+import { employee } from "../Interface/employee";
+
 type Action = {
   type: "CHANGE_INFO";
   payload: {
     key: string;
-    value: any;
+    value: string;
   };
 };
 
-export default (state: any, action: Action) => {
+export default (state: employee, action: Action) => {
   const {
     payload: { key, value },
     type,

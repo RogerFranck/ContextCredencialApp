@@ -1,7 +1,8 @@
 import { createContext } from "react";
 import { employee } from "../Interface/employee";
 
-const MyContext = createContext<any>({
+const MyContext = createContext<employee>({
+  ChangeInfo: () => {},
   nombre: "",
   fechaNacimiento: "",
   puesto: "",

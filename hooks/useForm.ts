@@ -3,14 +3,14 @@ import * as ImagePicker from "expo-image-picker";
 import MyContext from "../context/MyContext";
 
 export default function useForm() {
-  const state2 = useContext(MyContext);
+  const { ChangeInfo } = useContext(MyContext);
   const [state, setstate] = useState({
     nombre: "",
     date: new Date(),
     puesto: "",
     email: "",
     telefono: "",
-    image: "",
+    foto: "",
   });
   const [bloqueado, setbloqueado] = useState(false);
 
@@ -24,8 +24,12 @@ export default function useForm() {
     if (!result.canceled) {
       setstate({
         ...state,
-        image: result.assets[0].uri,
+        foto: result.assets[0].uri,
       });
+      if (!bloqueado) {
+        //! Actualizar context
+        ChangeInfo('foto', result.assets[0].uri);
+      }
     }
   };
 
@@ -36,7 +40,8 @@ export default function useForm() {
     });
     if (!bloqueado) {
       //! Actualizar context
-      state2.ChangeInfo(key, value);
+      ChangeInfo(key, value);
+      
     }
   };
 
