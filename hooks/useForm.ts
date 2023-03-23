@@ -1,10 +1,10 @@
-import { useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
-import { initialState, reducer } from "../context/MyState";
+import MyContext from "../context/MyContext";
 
 export default function useForm() {
-  const [stateContext, dispatch] = useReducer(reducer, initialState);
-
+  const state2 = useContext(MyContext);
+  console.log(state2);
   const [state, setstate] = useState({
     nombre: "",
     date: new Date(),
@@ -13,6 +13,7 @@ export default function useForm() {
     telefono: "",
     image: "",
   });
+  const [bloqueado, setbloqueado] = useState(false);
 
   const pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -34,13 +35,9 @@ export default function useForm() {
       ...state,
       [key]: value,
     });
-    dispatch({
-      type: "CHANGE_INFO",
-      payload: {
-        key,
-        value,
-      },
-    });
+    if (!bloqueado) {
+      //! Actualizar context
+    }
   };
 
   return {
@@ -48,5 +45,7 @@ export default function useForm() {
     pickImage,
     handleChange,
     setstate,
+    setbloqueado,
+    bloqueado,
   };
 }
