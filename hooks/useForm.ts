@@ -4,7 +4,6 @@ import MyContext from "../context/MyContext";
 
 export default function useForm() {
   const state2 = useContext(MyContext);
-  console.log(state2);
   const [state, setstate] = useState({
     nombre: "",
     date: new Date(),
@@ -37,6 +36,7 @@ export default function useForm() {
     });
     if (!bloqueado) {
       //! Actualizar context
+      state2.ChangeInfo(key, value);
     }
   };
 
