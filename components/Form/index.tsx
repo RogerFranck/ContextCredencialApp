@@ -167,6 +167,6 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
   },
   buttonNotSeletected: {
-    backgroundColor: "blue",
+    backgroundColor: "gray",
   },
 });
