@@ -4,13 +4,28 @@ import MyContext from "../context/MyContext";
 
 export default function useForm() {
   const { ChangeInfo } = useContext(MyContext);
+  const [stateErr,  setStateErr] = useState({
+    nombre: {
+      message: '',
+    },
+    email: {
+      message: '',
+    },
+    telefono: {
+      message: '',
+    },
+    foto: {
+      message: '',
+    },
+  })
+
   const [state, setstate] = useState({
-    nombre: "",
+    nombre: "Eren Yeager",
     date: new Date(),
-    puesto: "",
-    email: "",
-    telefono: "",
-    foto: "",
+    puesto: "Titan de ataque",
+    email: "ErenYeager@eldia.com",
+    telefono: "9999999999",
+    foto: "https://super-ficcion.com/wp-content/uploads/2022/02/Eren-Jaeger-780x470.webp",
   });
   const [bloqueado, setbloqueado] = useState(false);
 
@@ -34,6 +49,59 @@ export default function useForm() {
   };
 
   const handleChange = (key: string, value: string) => {
+    if (value.length == 0) {
+      setStateErr({
+        ...stateErr,
+        [key]: { message: 'Error' }
+      })
+    } else {
+      setStateErr({
+        ...stateErr,
+        [key]: { message: '' }
+      })
+    }
+    switch (key) {
+      case 'email':
+        if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(value)) {
+          setStateErr({
+            ...stateErr,
+            email: { message: 'Error, email no valido' }
+          })
+        } else {
+          setStateErr({
+            ...stateErr,
+            email: { message: '' }
+          })
+        }
+        break;
+      case 'telefono':
+        if (!/^\d{10}$/.test(value)) {
+          setStateErr({
+            ...stateErr,
+            telefono: { message: 'Error, telefono no valido' }
+          })
+        } else {
+          setStateErr({
+            ...stateErr,
+            telefono: { message: '' }
+          })
+        }
+        break;
+      case 'foto':
+        if (state.foto != "") {
+          setStateErr({
+            ...stateErr,
+            foto: { message: 'Error, no hay foto'}
+          })
+        } else {
+          setStateErr({
+            ...stateErr,
+            foto: { message: ''}
+          })
+        }
+      default:
+        break;
+    }
     setstate({
       ...state,
       [key]: value,
@@ -57,6 +125,7 @@ export default function useForm() {
     setstate,
     setbloqueado,
     bloqueado,
-    updateInfoForm
+    updateInfoForm,
+    stateErr
   };
 }

@@ -13,8 +13,13 @@ import useForm from "../../hooks/useForm";
 import useDate from "../../hooks/useDate";
 
 export default function Form() {
-  const { state, setstate, pickImage, handleChange, setbloqueado, bloqueado, updateInfoForm } = useForm();
+  const { state, setstate, pickImage, handleChange, setbloqueado, bloqueado, updateInfoForm, stateErr } = useForm();
   const { show, setShow, onChange, updateDateForm } = useDate(state, setstate, bloqueado);
+  const { 
+    nombre: { message: messageName },
+    email: {  message: messageEmail }, 
+    telefono: {  message: messageTelefono },
+    foto: { message: messageFoto } } = stateErr
   return (
     <View style={styles.border}>
       <View style={styles.bodyForm}>
@@ -24,6 +29,7 @@ export default function Form() {
           value={state.nombre}
           onChangeText={(value) => handleChange("nombre", value)}
         />
+        <Text style={{ color: 'red' }}>{messageName}</Text>
         <TouchableOpacity style={styles.input} onPress={() => setShow(true)}>
           {show && (
             <DateTimePicker
@@ -52,11 +58,13 @@ export default function Form() {
           style={styles.input}
           onChangeText={(value) => handleChange("email", value)}
         />
+        <Text style={{ color: 'red' }}>{messageEmail}</Text>
         <TextInput
           placeholder="TelÃ©fono"
           style={styles.input}
           onChangeText={(value) => handleChange("telefono", value)}
         />
+        <Text style={{ color: 'red' }}>{messageTelefono}</Text>
         <View style={styles.parentBox}>
           <TouchableOpacity style={styles.inputImg} onPress={pickImage}>
             <Text style={styles.inputText}>Foto</Text>
@@ -68,8 +76,10 @@ export default function Form() {
             />
           )}
         </View>
+        <Text style={{ color: 'red' }}>{messageFoto}</Text>
         <View style={styles.parentBox}>
           <TouchableOpacity
+          disabled= { (messageEmail || messageFoto || messageName || messageTelefono) ? true : false }
             style={[styles.button, bloqueado ? styles.buttonSeletected : styles.buttonNotSeletected]}
             onPress={() => {
               setbloqueado(true)
