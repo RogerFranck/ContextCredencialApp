@@ -22,6 +22,9 @@ export default function Form() {
     foto: { message: messageFoto } } = stateErr
   return (
     <View style={styles.border}>
+      <View style={styles.bodyTopText}>
+        <Text>Estado: {bloqueado ? 'Bloqueado' : 'Desbloqueado'}</Text>
+      </View>
       <View style={styles.bodyForm}>
         <TextInput
           placeholder="Nombre"
@@ -116,12 +119,16 @@ const styles = StyleSheet.create({
     padding: 10,
     alignItems: "center",
   },
+  bodyTopText: {
+    width: "100%",
+    backgroundColor: "white",
+    alignItems: "flex-end",
+    padding: 10,
+  },
   input: {
     width: "100%",
     height: 44,
     padding: 10,
-    marginTop: 7.5,
-    marginBottom: 7.5,
     backgroundColor: "#e8e8e8",
   },
   inputSelect: {
